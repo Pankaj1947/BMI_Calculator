@@ -16,7 +16,10 @@ export const Signup = () => {
 
     const handleSubmit = () => {
         console.log(user);
-        let payload = JSON.stringify(user); // Converting user object to string
+        if(user.email === "" || user.password === "") { // Checking if email or password is empty
+            alert("Please enter email and password")
+        } else {
+            let payload = JSON.stringify(user); // Converting user object to string
         fetch("http://localhost:8080/auth/signup", { // Fetching data from the backend
             headers: {
                 "Content-Type": "Application/json"
@@ -30,6 +33,7 @@ export const Signup = () => {
                 navigate("/login"); // Redirecting to login page
             })
             .catch((err) => console.log(err)); // Catching error
+        }
     }
     return (
       <>
